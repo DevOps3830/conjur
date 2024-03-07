@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: secretless-config
+data:
+  secretless.yml: |
+    version: 2
+    services:
+      mysql:
+        protocol: mysql
+        listenOn: tcp://0.0.0.0:3306
+        credentials:
+          host:
+            from: conjur
+            get: mariadb-host
+          username:
+            from: conjur
+            get: mariadb-username
+          password:
+            from: conjur
+            get: mariadb-password
+          database:
+            from: conjur
+            get: mariadb-database
